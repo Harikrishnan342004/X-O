@@ -1,8 +1,9 @@
-const boxs=document.querySelectorAll('.box');
-const statusTxt=document.querySelector('#status');
-const btnRestart=document.querySelector('#restart');
-let x="<img src='img/x.png'  style='height: 30px;width: 30px;'>";
-let o=" <img src='img/O.png'  style='height: 30px;width: 30px;'>";
+const boxs       = document.querySelectorAll('.box');
+const statusTxt  = document.querySelector('#status');
+const btnRestart = document.querySelector('#restart');
+
+let x   =  "<img src='img/x.png'  style='height: 30px;width: 30px;'>"  ;
+let o   =  " <img src='img/O.png'  style='height: 30px;width: 30px;'>" ;
 
 const win=[
   [0,1,2],
@@ -16,9 +17,10 @@ const win=[
 ];
 
 let options=["","","","","","","","",""];
-let currentPlayer=x;
-let player="X";
-let running=false;
+
+let currentPlayer =  x;
+let player        = "X";
+let running       =  false;
 init();
 
 function init(){
@@ -36,6 +38,20 @@ function boxClick(){
   updateBox(this,index);
   checkWinner();
 }
+
+function restartGame(){
+  options=["","","","","","","","",""];
+  currentPlayer=x;
+  player="X";
+  running=true;
+  statusTxt.textContent=`${player} Your Turn`;
+
+  boxs.forEach(box=>{
+      box.innerHTML="";
+      box.classList.remove('win');
+  });
+}
+
 
 function updateBox(box,index){
   options[index]=player;
@@ -78,15 +94,3 @@ function checkWinner(){
 
 }
 
-function restartGame(){
-  options=["","","","","","","","",""];
-  currentPlayer=x;
-  player="X";
-  running=true;
-  statusTxt.textContent=`${player} Your Turn`;
-
-  boxs.forEach(box=>{
-      box.innerHTML="";
-      box.classList.remove('win');
-  });
-}
